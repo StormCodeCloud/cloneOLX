@@ -1,44 +1,25 @@
-const express = require("express");
 const { Sequelize, DataTypes } = require("sequelize");
-const fs = require("fs"); // Import the File System module
-
-const app = express();
+const express = require("express");
 const port = 3000;
-const hostname = "127.0.0.1";
+const app = express();
 
-// Middleware to parse JSON requests
-app.use(express.json());
-
-// Sequelize configuration
+// Configuração do Sequelize
 const sequelize = new Sequelize("cloneOLX", "root", "password", {
   host: "localhost",
   dialect: "mysql",
   port: 3306,
 });
 
-// Test the database connection
+// Testar conexão
 sequelize
   .authenticate()
   .then(() => {
-    console.log(
-      "Connection to the database has been established successfully."
-    );
+    console.log("Conexão Sequelize estabelecida com sucesso!");
   })
   .catch((err) => {
-    console.error("Unable to connect to the database:", err);
+    console.error("Erro ao conectar ao MySQL via Sequelize:", err);
   });
 
-async function createDatabase() {
-  try {
-    await sequelize.query("CREATE DATABASE IF NOT EXISTS cloneOLX");
-    console.log("Database created successfully.");
-  } catch (error) {
-    console.error("Error creating database:", error);
-  }
-}
-
-// Start the server
 app.listen(port, () => {
-  const message = `Server running at http://${hostname}:${port}/`;
-  console.log(message);
+  console.log(`http://localhost:${port}.`);
 });
