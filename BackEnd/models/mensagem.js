@@ -35,6 +35,5 @@ module.exports = (sequelize, DataTypes) => {
     }
   );
 
-  // Associações podem ser definidas no index dos models ou aqui, se desejar
   return Mensagem;
 };
