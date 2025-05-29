@@ -11,3 +11,7 @@ async function listarMensagens(req, res) {
     res.status(500).json({ message: "Erro ao buscar mensagens", error });
   }
 }
+
+module.exports = {
+  listarMensagens,
+};

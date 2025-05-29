@@ -31,7 +31,25 @@ async function criarAdministrador(req, res) {
   }
 }
 
+async function eliminarUtilizadoresNaoAdmin(req, res) {
+  const { User } = require("../models");
+  try {
+    // Elimina todos os utilizadores que não são administradores
+    const result = await User.destroy({
+      where: {
+        isAdmin: false,
+      },
+    });
+    res
+      .status(200)
+      .json({ message: `${result} utilizadores eliminados com sucesso.` });
+  } catch (error) {
+    res.status(500).json({ message: "Erro ao eliminar utilizadores", error });
+  }
+}
+
 module.exports = {
   listarAdministradores,
   criarAdministrador,
+  eliminarUtilizadoresNaoAdmin,
 };

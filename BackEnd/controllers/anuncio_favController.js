@@ -29,6 +29,7 @@ async function adicionarFavorito(req, res) {
   }
 }
 
+// Exporta as funções para serem usadas em outras partes da aplicação
 module.exports = {
   listarFavoritos,
   adicionarFavorito,
