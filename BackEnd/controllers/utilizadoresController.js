@@ -4,6 +4,7 @@ const utilizadores = require("../models/utilizadores")(
   sequelize,
   Sequelize.DataTypes
 );
+const bcrypt = require("bcryptjs");
 
 // Listar todos os utilizadores
 async function listarUtilizadores(req, res) {
@@ -17,14 +18,25 @@ async function listarUtilizadores(req, res) {
 
 //  Registo de utilizadores: Os utilizadores devem ser capazes de se registar fornecendo um nome de utilizador, e-mail e password
 async function registarUtilizador(req, res) {
-  const { nome, email, password } = req.body;
+  const { nome, email, password, telefone } = req.body;
   try {
+    // Verifica se já existe utilizador com o mesmo email
+    const existente = await utilizadores.findOne({ where: { email } });
+    if (existente) {
+      return res.status(400).json({ message: "Email já registado." });
+    }
+    // Hash da password
+    const hash = await bcrypt.hash(password, 10);
     const novoUtilizador = await utilizadores.create({
       nome,
       email,
-      password,
+      password: hash,
+      telefone,
     });
-    res.status(201).json(novoUtilizador);
+    res.status(201).json({
+      message: "Utilizador registado com sucesso!",
+      utilizador: novoUtilizador,
+    });
   } catch (error) {
     res.status(500).json({ message: "Erro ao registar utilizador", error });
   }
@@ -35,10 +47,19 @@ async function loginUtilizador(req, res) {
   const { email, password } = req.body;
   try {
     const utilizador = await utilizadores.findOne({
-      where: { email, password },
+      where: { email },
     });
     if (utilizador) {
-      res.status(200).json(utilizador);
+      // Verifica a password
+      const isPasswordValid = await bcrypt.compare(
+        password,
+        utilizador.password
+      );
+      if (isPasswordValid) {
+        res.status(200).json(utilizador);
+      } else {
+        res.status(401).json({ message: "Credenciais inválidas" });
+      }
     } else {
       res.status(401).json({ message: "Credenciais inválidas" });
     }
@@ -70,4 +91,9 @@ async function criarAnuncio(req, res) {
   }
 }
 
-module.exports = {};
+module.exports = {
+  listarUtilizadores,
+  registarUtilizador,
+  loginUtilizador,
+  criarAnuncio,
+};
