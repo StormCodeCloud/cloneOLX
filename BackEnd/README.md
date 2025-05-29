@@ -12,7 +12,7 @@ _npm i express_
 mysql2 & sequelize
 _npm i sequelize mysql2_
 
-## Indice do projeto
+## Indice do projeto (REQUISITOS DO PROJETO)
 
 **Registo de utilizadores: Os utilizadores devem ser capazes de se registar fornecendo um nome de utilizador, e-mail e password**
 https://vscode.dev/github/StormCodeCloud/cloneOLX/blob/main/BackEnd/controllers/utilizadoresController.js#L18
@@ -22,3 +22,8 @@ https://vscode.dev/github/StormCodeCloud/cloneOLX/blob/main/BackEnd/controllers/
 
 **Publicar Anúncio: Os utilizadores autenticados devem ser capazes de criar anúncios**
 https://vscode.dev/github/StormCodeCloud/cloneOLX/blob/main/BackEnd/controllers/utilizadoresController.js#L51
+
+**Home Page: A aplicação deve ter uma página inicial que mostre toda a lista de anúncios disponíveis**
+(endpoint que mostra os anuncios) https://vscode.dev/github/StormCodeCloud/cloneOLX/blob/main/BackEnd/controllers/anuncioController.js#L5
+
+**Chat: Os utilizadores devem ser capazes de enviar e receber mensagens a um vendedo**
