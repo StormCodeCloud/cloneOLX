@@ -19,8 +19,10 @@
   "homepage": "https://github.com/StormCodeCloud/cloneOLX#readme",
   "dependencies": {
     "express": "^5.1.0",
+    "multer": "^2.0.0",
     "mysql2": "^3.14.1",
-    "sequelize": "^6.37.7"
+    "sequelize": "^6.37.7",
+    "socket.io-client": "^4.8.1"
   },
   "description": ""
 }

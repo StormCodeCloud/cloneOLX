@@ -46,6 +46,19 @@ io.on("connection", (socket) => {
   });
 });
 
+//routes
+const anuncioRoutes = require("./routes/anuncio");
+app.use("/api/anuncio", anuncioRoutes);
+
+const utilizadorRoutes = require("./routes/utilizador");
+app.use("/api/utilizador", utilizadorRoutes);
+
+const anuncioFavoritoRoutes = require("./routes/anuncio_favorito");
+app.use("/api/anuncio-favorito", anuncioFavoritoRoutes);
+
+const imagemRoutes = require("./routes/imagem");
+app.use("/api/imagem", imagemRoutes);
+
 server.listen(port, () => {
   console.log(`http://localhost:${port}.`);
 });
