@@ -1,0 +1,25 @@
+/* Override problematic styles */
+body, #root {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  min-width: 0;
+  box-sizing: border-box;
+  background: #fff;
+  overflow-x: hidden;
+}
+
+/* Imagens responsivas */
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+* {
+  max-width: 100% !important;
+}
+
+[style*="width: 100vw"], [style*="min-width: 100vw"] {
+  width: 100% !important;
+  min-width: 100% !important;
+} 

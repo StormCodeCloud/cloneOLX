@@ -1,0 +1,103 @@
+.saved-searches {
+  padding: 20px;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.saved-searches h2 {
+  color: var(--text-primary);
+  margin-bottom: 20px;
+}
+
+.no-searches {
+  text-align: center;
+  color: var(--text-secondary);
+  padding: 40px 0;
+}
+
+.saved-searches-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.saved-search-item {
+  background-color: var(--background-primary);
+  border: 1px solid var(--border-color);
+  border-radius: var(--border-radius);
+  padding: 15px;
+  margin-bottom: 15px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: all 0.3s ease;
+}
+
+.saved-search-item:hover {
+  box-shadow: var(--shadow-sm);
+}
+
+.search-info {
+  flex: 1;
+}
+
+.search-info h3 {
+  color: var(--text-primary);
+  margin: 0 0 5px 0;
+  font-size: 1.1em;
+}
+
+.filters {
+  color: var(--text-secondary);
+  font-size: 0.9em;
+  margin: 5px 0;
+}
+
+.date {
+  color: var(--text-muted);
+  font-size: 0.8em;
+}
+
+.actions {
+  display: flex;
+  gap: 10px;
+}
+
+.actions button {
+  background: none;
+  border: none;
+  padding: 8px;
+  cursor: pointer;
+  border-radius: var(--border-radius);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+}
+
+.btn-execute {
+  color: var(--primary-color);
+}
+
+.btn-notify {
+  color: var(--warning-color);
+}
+
+.btn-notify.active {
+  color: var(--warning-color);
+  background-color: var(--warning-color);
+  color: white;
+}
+
+.btn-delete {
+  color: var(--danger-color);
+}
+
+.actions button:hover {
+  background-color: var(--background-tertiary);
+}
+
+.actions button svg {
+  width: 16px;
+  height: 16px;
+} 
