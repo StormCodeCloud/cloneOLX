@@ -1,6 +1,7 @@
 const { Sequelize } = require("sequelize");
 const sequelize = require("../server").sequelize;
-const mensagem = require("../models/mesangem")(sequelize, Sequelize.DataTypes);
+const { mensagem } = require("../models");
+sequelize, Sequelize.DataTypes;
 
 // Enviar mensagem
 async function enviarMensagem(req, res) {

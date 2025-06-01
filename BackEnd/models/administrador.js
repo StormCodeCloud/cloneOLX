@@ -1,8 +1,8 @@
 const { DATE } = require("sequelize");
 
 module.exports = (sequelize, DataTypes) => {
-  const Mensagem = sequelize.define(
-    "Mensagem",
+  const admin = sequelize.define(
+    "administrador",
     {
       id_administrador: {
         type: DataTypes.INTEGER,
@@ -23,9 +23,9 @@ module.exports = (sequelize, DataTypes) => {
       },
     },
     {
-      tableName: "mensagem",
+      tableName: "administrador",
       timestamps: false,
     }
   );
-  return Mensagem;
+  return admin;
 };

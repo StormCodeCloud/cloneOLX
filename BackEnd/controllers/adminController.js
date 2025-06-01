@@ -1,9 +1,7 @@
 const { Sequelize } = require("sequelize");
 const sequelize = require("../server").sequelize;
-const Administrador = require("../models/administrador")(
-  sequelize,
-  Sequelize.DataTypes
-);
+const { Administrador } = require("../models");
+sequelize, Sequelize.DataTypes;
 
 // Listar todos os administradores
 async function listarAdministradores(req, res) {

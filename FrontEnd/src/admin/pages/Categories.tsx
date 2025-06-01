@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from 'react';
-import AdminSidebar from '../components/AdminSidebar.tsx';
-import AdminHeader from '../components/AdminHeader.tsx';
-import { FaEdit, FaTrash } from 'react-icons/fa';
+import React, { useState, useEffect } from "react";
+import AdminSidebar from "../components/AdminSidebar.tsx";
+import AdminHeader from "../components/AdminHeader.tsx";
+import { FaEdit, FaTrash } from "react-icons/fa";
 
 interface Category {
   id: number;
@@ -20,32 +20,32 @@ const Categories: React.FC = () => {
     setCategories([
       {
         id: 1,
-        name: 'Automóveis',
-        slug: 'automoveis',
+        name: "Automóveis",
+        slug: "automoveis",
         totalAds: 150,
-        isActive: true
+        isActive: true,
       },
       {
         id: 2,
-        name: 'Imóveis',
-        slug: 'imoveis',
+        name: "Imóveis",
+        slug: "imoveis",
         totalAds: 320,
-        isActive: true
+        isActive: true,
       },
       {
         id: 3,
-        name: 'Tecnologia',
-        slug: 'tecnologia',
+        name: "Tecnologia",
+        slug: "tecnologia",
         totalAds: 450,
-        isActive: true
+        isActive: true,
       },
       {
         id: 4,
-        name: 'Vestuário',
-        slug: 'vestuario',
+        name: "Vestuário",
+        slug: "vestuario",
         totalAds: 280,
-        isActive: false
-      }
+        isActive: false,
+      },
     ]);
     setLoading(false);
   }, []);
@@ -55,15 +55,13 @@ const Categories: React.FC = () => {
       <AdminSidebar />
       <div className="flex-grow-1">
         <AdminHeader title="Gestão de Categorias" />
-        
+
         <main className="p-4">
           <div className="card border-0 shadow-sm">
             <div className="card-body">
               <div className="d-flex justify-content-between align-items-center mb-4">
                 <h5 className="card-title mb-0">Lista de Categorias</h5>
-                <button className="btn btn-primary">
-                  + Nova Categoria
-                </button>
+                <button className="btn btn-primary">+ Nova Categoria</button>
               </div>
 
               {loading ? (
@@ -82,11 +80,13 @@ const Categories: React.FC = () => {
                       </tr>
                     </thead>
                     <tbody>
-                      {categories.map(category => (
+                      {categories.map((category) => (
                         <tr key={category.id}>
                           <td>{category.id}</td>
                           <td>{category.name}</td>
-                          <td><code>{category.slug}</code></td>
+                          <td>
+                            <code>{category.slug}</code>
+                          </td>
                           <td>{category.totalAds}</td>
                           <td>
                             <div className="form-check form-switch">
@@ -122,4 +122,4 @@ const Categories: React.FC = () => {
   );
 };
 
-export default Categories; 
+export default Categories;

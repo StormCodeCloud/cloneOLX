@@ -1,6 +1,6 @@
 module.exports = (sequelize, DataTypes) => {
-  const Mensagem = sequelize.define(
-    "Mensagem",
+  const Categoria = sequelize.define(
+    "Categoria",
     {
       id_categoria: {
         type: DataTypes.INTEGER,
@@ -8,14 +8,14 @@ module.exports = (sequelize, DataTypes) => {
         primaryKey: true,
       },
       nome_categoria: {
-        type: DataTypes.TEXT,
+        type: DataTypes.STRING(45),
         allowNull: false,
       },
     },
     {
-      tableName: "mensagem",
+      tableName: "categoria",
       timestamps: false,
     }
   );
-  return Mensagem;
+  return Categoria;
 };

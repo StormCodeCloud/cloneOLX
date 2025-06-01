@@ -1,6 +1,6 @@
 module.exports = (sequelize, DataTypes) => {
-  const Mensagem = sequelize.define(
-    "Mensagem",
+  const Historico = sequelize.define(
+    "Historico_visualizacao",
     {
       id_visualizacao: {
         type: DataTypes.INTEGER,
@@ -38,9 +38,9 @@ module.exports = (sequelize, DataTypes) => {
       },
     },
     {
-      tableName: "mensagem",
+      tableName: "Historico_visualizacao",
       timestamps: false,
     }
   );
-  return Mensagem;
+  return Historico;
 };

@@ -1,9 +1,7 @@
 const { Sequelize } = require("sequelize");
 const sequelize = require("../server").sequelize;
-const AnuncioFavorito = require("../models/anuncio_favorito")(
-  sequelize,
-  Sequelize.DataTypes
-);
+const { AnuncioFavorito } = require("../models");
+sequelize, Sequelize.DataTypes;
 
 // Listar todos os favoritos
 async function listarFavoritos(req, res) {

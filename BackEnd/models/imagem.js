@@ -1,6 +1,6 @@
 module.exports = (sequelize, DataTypes) => {
-  const Mensagem = sequelize.define(
-    "Mensagem",
+  const Imagem = sequelize.define(
+    "Imagem",
     {
       id_imagem: {
         type: DataTypes.INTEGER,
@@ -8,22 +8,18 @@ module.exports = (sequelize, DataTypes) => {
         primaryKey: true,
       },
       caminho_ficheiro: {
-        type: DataTypes.TEXT,
+        type: DataTypes.STRING(255),
         allowNull: false,
-      }, //FOREIGN KEY (id_anuncio) REFERENCES anuncio(id_anuncio)
+      },
       id_anuncio: {
         type: DataTypes.INTEGER,
         allowNull: false,
-        references: {
-          model: "anuncio",
-          key: "id_anuncio",
-        },
       },
     },
     {
-      tableName: "mensagem",
+      tableName: "imagem",
       timestamps: false,
     }
   );
-  return { Mensagem, Imagem };
+  return Imagem;
 };

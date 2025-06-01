@@ -1,6 +1,6 @@
 module.exports = (sequelize, DataTypes) => {
-  const Mensagem = sequelize.define(
-    "Mensagem",
+  const Localizacao = sequelize.define(
+    "Localizacao",
     {
       id_localizacao: {
         type: DataTypes.INTEGER,
@@ -8,20 +8,18 @@ module.exports = (sequelize, DataTypes) => {
         primaryKey: true,
       },
       distrito: {
-        type: DataTypes.TEXT,
+        type: DataTypes.STRING(45),
         allowNull: false,
       },
       concelho: {
-        type: DataTypes.TEXT,
+        type: DataTypes.STRING(45),
         allowNull: false,
       },
     },
     {
-      tableName: "mensagem",
+      tableName: "localizacao",
       timestamps: false,
     }
   );
-
-  // Associações podem ser definidas no index dos models ou aqui, se desejar
-  return Mensagem;
+  return Localizacao;
 };

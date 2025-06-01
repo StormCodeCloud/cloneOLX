@@ -1,9 +1,7 @@
 const { Sequelize } = require("sequelize");
 const sequelize = require("../server").sequelize;
-const utilizadores = require("../models/utilizadores")(
-  sequelize,
-  Sequelize.DataTypes
-);
+const { Utilizador } = require("../models");
+sequelize, Sequelize.DataTypes;
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const SECRET = process.env.JWT_SECRET || "segredo_super_secreto";
@@ -11,7 +9,7 @@ const SECRET = process.env.JWT_SECRET || "segredo_super_secreto";
 // Listar todos os utilizadores
 async function listarUtilizadores(req, res) {
   try {
-    const utilizadoresList = await utilizadores.findAll();
+    const utilizadoresList = await Utilizador.findAll();
     res.status(200).json(utilizadoresList);
   } catch (error) {
     res.status(500).json({ message: "Erro ao buscar utilizadores", error });
@@ -23,13 +21,13 @@ async function registarUtilizador(req, res) {
   const { nome, email, password, telefone } = req.body;
   try {
     // Verifica se já existe utilizador com o mesmo email
-    const existente = await utilizadores.findOne({ where: { email } });
+    const existente = await Utilizador.findOne({ where: { email } });
     if (existente) {
       return res.status(400).json({ message: "Email já registado." });
     }
     // Hash da password
     const hash = await bcrypt.hash(password, 10);
-    const novoUtilizador = await utilizadores.create({
+    const novoUtilizador = await Utilizador.create({
       nome,
       email,
       password: hash,
@@ -40,6 +38,7 @@ async function registarUtilizador(req, res) {
       utilizador: novoUtilizador,
     });
   } catch (error) {
+    console.error("Erro detalhado ao registar utilizador:", error);
     res.status(500).json({ message: "Erro ao registar utilizador", error });
   }
 }
@@ -48,7 +47,7 @@ async function registarUtilizador(req, res) {
 async function loginUtilizador(req, res) {
   const { email, password } = req.body;
   try {
-    const utilizador = await utilizadores.findOne({ where: { email } });
+    const utilizador = await Utilizador.findOne({ where: { email } });
     if (!utilizador) {
       return res.status(401).json({ message: "Credenciais inválidas" });
     }
@@ -103,7 +102,7 @@ async function criarAnuncio(req, res) {
 // Visualizar todos os utilizadores
 async function listarUtilizadores(req, res) {
   try {
-    const utilizadoresList = await utilizadores.findAll();
+    const utilizadoresList = await Utilizador.findAll();
     res.status(200).json(utilizadoresList);
   } catch (error) {
     res.status(500).json({ message: "Erro ao buscar utilizadores", error });
@@ -115,7 +114,7 @@ async function editarUtilizador(req, res) {
   const { id } = req.params;
   const { nome, email, telefone, estado_conta } = req.body;
   try {
-    const utilizador = await utilizadores.findByPk(id);
+    const utilizador = await Utilizador.findByPk(id);
     if (!utilizador)
       return res.status(404).json({ message: "Utilizador não encontrado" });
     await utilizador.update({ nome, email, telefone, estado_conta });
@@ -132,7 +131,7 @@ async function editarUtilizador(req, res) {
 async function excluirUtilizador(req, res) {
   const { id } = req.params;
   try {
-    const utilizador = await utilizadores.findByPk(id);
+    const utilizador = await Utilizador.findByPk(id);
     if (!utilizador)
       return res.status(404).json({ message: "Utilizador não encontrado" });
     await utilizador.destroy();

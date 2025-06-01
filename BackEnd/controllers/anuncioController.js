@@ -1,7 +1,8 @@
 const jwt = require("jsonwebtoken");
 const { Sequelize } = require("sequelize");
 const sequelize = require("../server").sequelize;
-const Anuncio = require("../models/anuncio")(sequelize, Sequelize.DataTypes);
+const { Anuncio } = require("../models");
+sequelize, Sequelize.DataTypes;
 const SECRET = process.env.JWT_SECRET || "segredo_super_secreto";
 
 // Middleware para autenticação JWT

@@ -2,7 +2,8 @@ const multer = require("multer");
 const path = require("path");
 const { Sequelize } = require("sequelize");
 const sequelize = require("../server").sequelize;
-const Imagem = require("../models/imagem")(sequelize, Sequelize.DataTypes);
+const { Imagem } = require("../models");
+sequelize, Sequelize.DataTypes;
 
 // Configuração do multer para upload de imagens
 const storage = multer.diskStorage({

@@ -1,9 +1,7 @@
 const { Sequelize } = require("sequelize");
 const sequelize = require("../server").sequelize;
-const Categoria = require("../models/categoria")(
-  sequelize,
-  Sequelize.DataTypes
-);
+const { Categoria } = require("../models");
+sequelize, Sequelize.DataTypes;
 
 // Listar todas as categorias
 async function listarCategorias(req, res) {
