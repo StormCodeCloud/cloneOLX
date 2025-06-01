@@ -27,8 +27,8 @@
 
 ### 6. Seguir Anúncio
 
-- Demonstre os endpoints POST `/api/anuncio-favorito/seguir` e DELETE `/api/anuncio-favorito/desseguir`.
-- Mostrar como o utilizador pode seguir/desseguir anúncios e como isso é salvo no banco.
+- Demonstre os endpoints POST `/api/anuncio-favorito/seguir` e DELETE `/api/anuncio-favorito/ .
+- Mostrar como o utilizador pode seguir/ anúncios e como isso é salvo no banco.
 
 ### 7. Listar Anúncios Seguidos
 

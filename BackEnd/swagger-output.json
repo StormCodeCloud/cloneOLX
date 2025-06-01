@@ -1,0 +1,607 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "API Clone OLX",
+    "description": "API REST para o clone do OLX com autenticação, chat e upload de imagens",
+    "version": "1.0.0"
+  },
+  "host": "localhost:3000",
+  "basePath": "/api",
+  "schemes": [
+    "http"
+  ],
+  "securityDefinitions": {
+    "bearerAuth": {
+      "type": "apiKey",
+      "name": "Authorization",
+      "in": "header",
+      "description": "Token JWT no formato: Bearer {token}"
+    }
+  },
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/registar": {
+      "post": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "nome": {
+                  "example": "any"
+                },
+                "email": {
+                  "example": "any"
+                },
+                "password": {
+                  "example": "any"
+                },
+                "telefone": {
+                  "example": "any"
+                },
+                "id_localizacao": {
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/login": {
+      "post": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "email_administrador": {
+                  "example": "any"
+                },
+                "password_administrador": {
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/": {
+      "get": {
+        "description": "",
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/{id}": {
+      "put": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "titulo": {
+                  "example": "any"
+                },
+                "descricao": {
+                  "example": "any"
+                },
+                "preco": {
+                  "example": "any"
+                },
+                "estado": {
+                  "example": "any"
+                },
+                "id_categoria": {
+                  "example": "any"
+                },
+                "id_localizacao": {
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      },
+      "delete": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/criar": {
+      "post": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "nome_categoria": {
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/eliminar-nao-admin": {
+      "delete": {
+        "description": "",
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/adicionar": {
+      "post": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "distrito": {
+                  "example": "any"
+                },
+                "concelho": {
+                  "example": "any"
+                },
+                "freguesia": {
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/upload": {
+      "post": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "id_anuncio": {
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/seguir": {
+      "post": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "id_utilizador": {
+                  "example": "any"
+                },
+                "id_anuncio": {
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/desseguir": {
+      "delete": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "id_utilizador": {
+                  "example": "any"
+                },
+                "id_anuncio": {
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/enviar": {
+      "post": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "id_remetente": {
+                  "example": "any"
+                },
+                "id_destinatario": {
+                  "example": "any"
+                },
+                "id_anuncio": {
+                  "example": "any"
+                },
+                "conteudo": {
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/listar": {
+      "get": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "id_remetente",
+            "in": "query",
+            "type": "string"
+          },
+          {
+            "name": "id_destinatario",
+            "in": "query",
+            "type": "string"
+          },
+          {
+            "name": "id_anuncio",
+            "in": "query",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Utilizador": {
+      "type": "object",
+      "properties": {
+        "nome": {
+          "type": "string",
+          "example": "João Silva"
+        },
+        "email": {
+          "type": "string",
+          "example": "joao@email.com"
+        },
+        "password": {
+          "type": "string",
+          "example": "senha123"
+        },
+        "telefone": {
+          "type": "string",
+          "example": "912345678"
+        },
+        "id_localizacao": {
+          "type": "number",
+          "example": 1
+        }
+      },
+      "required": [
+        "nome",
+        "email",
+        "password",
+        "id_localizacao"
+      ]
+    },
+    "LoginInput": {
+      "type": "object",
+      "properties": {
+        "email": {
+          "type": "string",
+          "example": "joao@email.com"
+        },
+        "password": {
+          "type": "string",
+          "example": "senha123"
+        }
+      },
+      "required": [
+        "email",
+        "password"
+      ]
+    },
+    "Anuncio": {
+      "type": "object",
+      "properties": {
+        "titulo": {
+          "type": "string",
+          "example": "iPhone 13 Pro Max"
+        },
+        "descricao": {
+          "type": "string",
+          "example": "iPhone 13 Pro Max 256GB, cor grafite, estado novo"
+        },
+        "preco": {
+          "type": "number",
+          "example": 899.99
+        },
+        "id_categoria": {
+          "type": "number",
+          "example": 1
+        },
+        "id_localizacao": {
+          "type": "number",
+          "example": 1
+        }
+      },
+      "required": [
+        "titulo",
+        "descricao",
+        "preco",
+        "id_categoria",
+        "id_localizacao"
+      ]
+    },
+    "Administrador": {
+      "type": "object",
+      "properties": {
+        "nome_administrador": {
+          "type": "string",
+          "example": "Admin"
+        },
+        "email_administrador": {
+          "type": "string",
+          "example": "admin@cloneolx.com"
+        },
+        "password_administrador": {
+          "type": "string",
+          "example": "senha456"
+        }
+      },
+      "required": [
+        "nome_administrador",
+        "email_administrador",
+        "password_administrador"
+      ]
+    },
+    "Categoria": {
+      "type": "object",
+      "properties": {
+        "nome_categoria": {
+          "type": "string",
+          "example": "Tecnologia"
+        }
+      },
+      "required": [
+        "nome_categoria"
+      ]
+    },
+    "Localizacao": {
+      "type": "object",
+      "properties": {
+        "distrito": {
+          "type": "string",
+          "example": "Porto Santo"
+        },
+        "concelho": {
+          "type": "string",
+          "example": "Porto Santo"
+        },
+        "freguesia": {
+          "type": "string",
+          "example": "Zona do Tanque"
+        }
+      },
+      "required": [
+        "distrito",
+        "concelho",
+        "freguesia"
+      ]
+    },
+    "Error": {
+      "type": "object",
+      "properties": {
+        "message": {
+          "type": "string",
+          "example": "Mensagem de erro"
+        },
+        "error": {
+          "type": "string",
+          "example": "Detalhes do erro"
+        }
+      }
+    }
+  }
+}

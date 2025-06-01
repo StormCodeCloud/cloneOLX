@@ -2,6 +2,7 @@
 const sequelize = require("../db_sequelize");
 const { DataTypes } = require("sequelize");
 
+// Importar modelos
 const Utilizador = require("./utilizadores")(sequelize, DataTypes);
 const Anuncio = require("./anuncio")(sequelize, DataTypes);
 const Categoria = require("./categoria")(sequelize, DataTypes);
@@ -9,6 +10,11 @@ const Imagem = require("./imagem")(sequelize, DataTypes);
 const AnuncioFavorito = require("./anuncio_favorito")(sequelize, DataTypes);
 const Localizacao = require("./localizacao")(sequelize, DataTypes);
 const Administrador = require("./administrador")(sequelize, DataTypes);
+const Mensagem = require("./mensagem")(sequelize, DataTypes);
+const HistoricoVisualizacao = require("./historico_visualizaçao")(
+  sequelize,
+  DataTypes
+);
 
 // Associações
 Utilizador.hasMany(Anuncio, { foreignKey: "id_utilizador" });
@@ -23,6 +29,7 @@ Utilizador.belongsToMany(Anuncio, {
   foreignKey: "id_utilizador",
   otherKey: "id_anuncio",
 });
+
 Anuncio.belongsToMany(Utilizador, {
   through: AnuncioFavorito,
   as: "Seguidores",
@@ -30,6 +37,7 @@ Anuncio.belongsToMany(Utilizador, {
   otherKey: "id_utilizador",
 });
 
+// Exportar modelos e sequelize
 module.exports = {
   sequelize,
   Utilizador,
@@ -39,4 +47,6 @@ module.exports = {
   AnuncioFavorito,
   Localizacao,
   Administrador,
+  Mensagem,
+  HistoricoVisualizacao,
 };

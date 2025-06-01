@@ -1,25 +1,29 @@
-const { Sequelize, DataTypes } = require("sequelize");
 const express = require("express");
 const http = require("http");
 const { Server } = require("socket.io");
-const port = 3000;
+const port = process.env.PORT || 3000;
 const app = express();
+const fs = require("fs");
+const path = require("path");
+const sequelize = require("./db_sequelize");
 
-// Configuração do Sequelize
-const sequelize = new Sequelize("cloneOLX", "root", "password", {
-  host: "localhost",
-  dialect: "mysql",
-  port: 3306,
-});
+// Configuração do Swagger
+const swaggerUi = require("swagger-ui-express");
+// Tentar carregar o swagger apenas se o arquivo existir
+const swaggerPath = path.join(__dirname, "swagger-output.json");
+if (fs.existsSync(swaggerPath)) {
+  const swaggerFile = require("./swagger-output.json");
+  app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerFile));
+}
 
 // Testar conexão
 sequelize
   .authenticate()
   .then(() => {
-    console.log("Conexão Sequelize estabelecida com sucesso!");
+    console.log("Conexão com o banco de dados estabelecida com sucesso!");
   })
   .catch((err) => {
-    console.error("Erro ao conectar ao MySQL via Sequelize:", err);
+    console.error("Erro ao conectar ao banco de dados:", err);
   });
 
 app.use(express.json());
