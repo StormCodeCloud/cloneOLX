@@ -57,6 +57,21 @@ const doc = {
       error: "Detalhes do erro",
     },
   },
+  paths: {
+    "/admin/logout": {
+      post: {
+        description: "Logout de administradores",
+        responses: {
+          200: {
+            description: "Logout realizado com sucesso",
+          },
+          500: {
+            description: "Erro interno do servidor",
+          },
+        },
+      },
+    },
+  },
 };
 
 const outputFile = "./swagger-output.json";

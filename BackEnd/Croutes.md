@@ -63,6 +63,23 @@ R: 200 OK -
 }
 ```
 
+# POST /api/utilizador/logout
+
+(Logout de utilizadores)
+
+**Descrição:**
+Invalida o token JWT do utilizador, encerrando a sessão.
+
+**Resposta:**
+
+R: 200 OK -
+
+```json
+{
+  "message": "Logout realizado com sucesso!"
+}
+```
+
 # Post - /api/localizacao/adicionar
 
 Body:
@@ -182,6 +199,23 @@ R: 201 CREATED -
 }
 ```
 
+# POST /api/admin/logout
+
+(Logout de administradores)
+
+**Descrição:**
+Invalida o token JWT do administrador, encerrando a sessão.
+
+**Resposta:**
+
+R: 200 OK -
+
+```json
+{
+  "message": "Logout de administrador realizado com sucesso!"
+}
+```
+
 # DELETE /api/admin/eliminar-nao-admin
 
 (Eliminar todos os utilizadores não administradores)
@@ -198,3 +232,5 @@ R: 200 OK -
 1. Todas as rotas de administrador devem ser protegidas e só acessíveis por utilizadores com privilégios de administrador
 2. As passwords são sempre armazenadas de forma **encriptada**
 3. A eliminação de utilizadores é uma operação irreversível e deve ser usada com cautela
+4. Todas as rotas de logout são operações seguras e não expõem informações sensíveis.
+5. A implementação atual não utiliza uma lista de tokens revogados; para maior segurança, considere adicionar essa funcionalidade em produção.

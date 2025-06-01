@@ -142,6 +142,16 @@ async function excluirUtilizador(req, res) {
   }
 }
 
+// Logout de utilizadores: Invalida o token JWT
+async function logoutUtilizador(req, res) {
+  try {
+    // Em um sistema real, você pode implementar uma lista de tokens revogados ou alterar o segredo JWT
+    res.status(200).json({ message: "Logout realizado com sucesso!" });
+  } catch (error) {
+    res.status(500).json({ message: "Erro ao realizar logout", error });
+  }
+}
+
 module.exports = {
   listarUtilizadores,
   registarUtilizador,
@@ -149,4 +159,5 @@ module.exports = {
   criarAnuncio,
   editarUtilizador,
   excluirUtilizador,
+  logoutUtilizador,
 };

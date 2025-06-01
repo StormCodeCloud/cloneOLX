@@ -1,5 +1,5 @@
 const { Sequelize } = require("sequelize");
-require("dotenv/lib/main").config();
+require("dotenv").config();
 //dotenv é usado para carregar variáveis de ambiente do arquivo .env
 
 const sequelize = new Sequelize(

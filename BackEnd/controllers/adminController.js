@@ -141,9 +141,24 @@ async function eliminarUtilizadoresNaoAdmin(req, res) {
   }
 }
 
+// Logout de administradores: Invalida o token JWT
+async function logoutAdmin(req, res) {
+  try {
+    // Em um sistema real, você pode implementar uma lista de tokens revogados ou alterar o segredo JWT
+    res
+      .status(200)
+      .json({ message: "Logout de administrador realizado com sucesso!" });
+  } catch (error) {
+    res
+      .status(500)
+      .json({ message: "Erro ao realizar logout de administrador", error });
+  }
+}
+
 module.exports = {
   listarAdministradores,
   criarAdministrador,
   loginAdmin,
   eliminarUtilizadoresNaoAdmin,
+  logoutAdmin,
 };

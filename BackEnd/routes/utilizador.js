@@ -5,6 +5,7 @@ const utilizadoresController = require("../controllers/utilizadoresController");
 // Frontoffice - utilizadores
 router.post("/registar", utilizadoresController.registarUtilizador);
 router.post("/login", utilizadoresController.loginUtilizador);
+router.post("/logout", utilizadoresController.logoutUtilizador);
 
 // Backoffice admin - utilizadores
 router.get("/", utilizadoresController.listarUtilizadores);

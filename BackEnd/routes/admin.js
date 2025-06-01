@@ -13,5 +13,7 @@ router.delete(
   "/eliminar-nao-admin",
   adminController.eliminarUtilizadoresNaoAdmin
 );
+// Rota para logout de administradores
+router.post("/logout", adminController.logoutAdmin);
 
 module.exports = router;
