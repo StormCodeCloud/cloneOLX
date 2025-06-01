@@ -2,19 +2,28 @@ const express = require("express");
 const router = express.Router();
 const anuncioController = require("../controllers/anuncioController");
 
-// Criar anúncio (protegido)
+// Listar todos os anúncios (public)
+router.get("/", anuncioController.listarAnuncios);
+
+// Criar anúncio (requer autenticação)
 router.post(
   "/criar",
   anuncioController.autenticarJWT,
   anuncioController.criarAnuncio
 );
 
-// Listar todos os anúncios (home page)
-router.get("/", anuncioController.listarAnuncios);
+// Editar anúncio (requer autenticação)
+router.put(
+  "/:id",
+  anuncioController.autenticarJWT,
+  anuncioController.editarAnuncio
+);
 
-// Backoffice admin - anúncios
-router.get("/", anuncioController.listarAnuncios);
-router.put("/:id", anuncioController.editarAnuncio);
-router.delete("/:id", anuncioController.excluirAnuncio);
+// Excluir anúncio (requer autenticação)
+router.delete(
+  "/:id",
+  anuncioController.autenticarJWT,
+  anuncioController.excluirAnuncio
+);
 
 module.exports = router;

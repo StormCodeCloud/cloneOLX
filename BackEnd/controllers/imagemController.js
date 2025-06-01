@@ -28,11 +28,11 @@ async function listarImagens(req, res) {
 
 // Adicionar uma imagem
 async function adicionarImagem(req, res) {
-  const { id_anuncio, url_imagem } = req.body;
+  const { id_anuncio, caminho_ficheiro } = req.body;
   try {
     const novaImagem = await Imagem.create({
       id_anuncio,
-      url_imagem,
+      caminho_ficheiro,
     });
     res.status(201).json(novaImagem);
   } catch (error) {

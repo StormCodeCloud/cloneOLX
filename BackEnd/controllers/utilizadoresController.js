@@ -18,7 +18,7 @@ async function listarUtilizadores(req, res) {
 
 //  Registo de utilizadores: Os utilizadores devem ser capazes de se registar fornecendo um nome de utilizador, e-mail e password
 async function registarUtilizador(req, res) {
-  const { nome, email, password, telefone } = req.body;
+  const { nome, email, password, telefone, id_localizacao } = req.body;
   try {
     // Verifica se já existe utilizador com o mesmo email
     const existente = await Utilizador.findOne({ where: { email } });
@@ -32,6 +32,7 @@ async function registarUtilizador(req, res) {
       email,
       password: hash,
       telefone,
+      id_localizacao,
     });
     res.status(201).json({
       message: "Utilizador registado com sucesso!",

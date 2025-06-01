@@ -59,6 +59,21 @@ app.use("/api/anuncio-favorito", anuncioFavoritoRoutes);
 const imagemRoutes = require("./routes/imagem");
 app.use("/api/imagem", imagemRoutes);
 
+const categoriaRoutes = require("./routes/categoria");
+app.use("/api/categoria", categoriaRoutes);
+
+const localizacaoRoutes = require("./routes/localizacao");
+app.use("/api/localizacao", localizacaoRoutes);
+
+const historicoRoutes = require("./routes/historico");
+app.use("/api/historico", historicoRoutes);
+
+const mensagemRoutes = require("./routes/mensagem");
+app.use("/api/mensagem", mensagemRoutes);
+
+const adminRoutes = require("./routes/admin");
+app.use("/api/admin", adminRoutes);
+
 server.listen(port, () => {
   console.log(`http://localhost:${port}.`);
 });

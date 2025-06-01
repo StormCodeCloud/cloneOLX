@@ -7,6 +7,8 @@ const Anuncio = require("./anuncio")(sequelize, DataTypes);
 const Categoria = require("./categoria")(sequelize, DataTypes);
 const Imagem = require("./imagem")(sequelize, DataTypes);
 const AnuncioFavorito = require("./anuncio_favorito")(sequelize, DataTypes);
+const Localizacao = require("./localizacao")(sequelize, DataTypes);
+const Administrador = require("./administrador")(sequelize, DataTypes);
 
 // Associações
 Utilizador.hasMany(Anuncio, { foreignKey: "id_utilizador" });
@@ -35,4 +37,6 @@ module.exports = {
   Categoria,
   Imagem,
   AnuncioFavorito,
+  Localizacao,
+  Administrador,
 };

@@ -15,6 +15,10 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.STRING(45),
         allowNull: false,
       },
+      freguesia: {
+        type: DataTypes.STRING(45),
+        allowNull: false,
+      },
     },
     {
       tableName: "localizacao",

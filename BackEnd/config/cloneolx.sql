@@ -100,3 +100,5 @@ CREATE TABLE pesquisa_guardada (
   FOREIGN KEY (id_utilizador) REFERENCES utilizador(id_utilizador),
   FOREIGN KEY (id_localizacao) REFERENCES localizacao(id_localizacao)
 );
+
+DROP database cloneOLX;

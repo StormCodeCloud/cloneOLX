@@ -29,44 +29,42 @@ async function listarAnuncios(req, res) {
   }
 }
 
-// Criar um novo anúncio
+// Criar um novo anúncio (autenticado)
 async function criarAnuncio(req, res) {
-  const {
-    id_utilizador,
-    id_categoria,
-    id_localizacao,
-    titulo_anuncio,
-    preco_anuncio,
-  } = req.body;
-  try {
-    const novoAnuncio = await Anuncio.create({
-      id_utilizador,
-      id_categoria,
-      id_localizacao,
-      titulo_anuncio,
-      preco_anuncio,
-    });
-    res.status(201).json(novoAnuncio);
-  } catch (error) {
-    res.status(500).json({ message: "Erro ao criar anúncio", error });
-  }
-}
-
-// Criar anúncio (apenas autenticado)
-async function criarAnuncioAutenticado(req, res) {
   const { titulo, descricao, preco, id_categoria, id_localizacao } = req.body;
+
+  // Validar campos obrigatórios
+  if (!titulo || !descricao || !preco || !id_categoria || !id_localizacao) {
+    return res.status(400).json({
+      message: "Campos obrigatórios faltando",
+      required: [
+        "titulo",
+        "descricao",
+        "preco",
+        "id_categoria",
+        "id_localizacao",
+      ],
+      received: req.body,
+    });
+  }
+
   try {
     const novoAnuncio = await Anuncio.create({
       titulo,
       descricao,
       preco,
-      id_utilizador: req.user.id, // do token JWT
+      id_utilizador: req.user.id, // Obtém o ID do usuário do token JWT
       id_categoria,
       id_localizacao,
+      estado: "ativo", // Estado default
     });
     res.status(201).json(novoAnuncio);
   } catch (error) {
-    res.status(500).json({ message: "Erro ao criar anúncio", error });
+    console.error("Erro ao criar anúncio:", error);
+    res.status(500).json({
+      message: "Erro ao criar anúncio",
+      error: error.message,
+    });
   }
 }
 
@@ -75,10 +73,18 @@ async function editarAnuncio(req, res) {
   const { id } = req.params;
   const { titulo, descricao, preco, estado, id_categoria, id_localizacao } =
     req.body;
+
   try {
     const anuncio = await Anuncio.findByPk(id);
-    if (!anuncio)
+    if (!anuncio) {
       return res.status(404).json({ message: "Anúncio não encontrado" });
+    }
+
+    // Verificar se o usuário é dono do anúncio
+    if (anuncio.id_utilizador !== req.user.id) {
+      return res.status(403).json({ message: "Não autorizado" });
+    }
+
     await anuncio.update({
       titulo,
       descricao,
@@ -87,9 +93,11 @@ async function editarAnuncio(req, res) {
       id_categoria,
       id_localizacao,
     });
-    res
-      .status(200)
-      .json({ message: "Anúncio atualizado com sucesso", anuncio });
+
+    res.status(200).json({
+      message: "Anúncio atualizado com sucesso",
+      anuncio,
+    });
   } catch (error) {
     res.status(500).json({ message: "Erro ao editar anúncio", error });
   }
@@ -98,10 +106,18 @@ async function editarAnuncio(req, res) {
 // Excluir anúncio
 async function excluirAnuncio(req, res) {
   const { id } = req.params;
+
   try {
     const anuncio = await Anuncio.findByPk(id);
-    if (!anuncio)
+    if (!anuncio) {
       return res.status(404).json({ message: "Anúncio não encontrado" });
+    }
+
+    // Verificar se o usuário é dono do anúncio
+    if (anuncio.id_utilizador !== req.user.id) {
+      return res.status(403).json({ message: "Não autorizado" });
+    }
+
     await anuncio.destroy();
     res.status(200).json({ message: "Anúncio excluído com sucesso" });
   } catch (error) {
@@ -113,7 +129,6 @@ module.exports = {
   listarAnuncios,
   criarAnuncio,
   autenticarJWT,
-  criarAnuncioAutenticado,
   editarAnuncio,
   excluirAnuncio,
 };
