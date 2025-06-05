@@ -5,9 +5,10 @@ const bcrypt = require("bcrypt");
 
 // Listar todos os administradores
 async function listarAdministradores(req, res) {
+  const { Administrador } = require("../models"); // Carregamento tardio
   try {
     const admins = await Administrador.findAll({
-      attributes: { exclude: ["password_administrador"] }, // Não retorna as senhas
+      attributes: { exclude: ["password_administrador"] },
     });
     res.status(200).json(admins);
   } catch (error) {
