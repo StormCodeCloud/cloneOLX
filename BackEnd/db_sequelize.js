@@ -2,7 +2,7 @@ const { Sequelize } = require("sequelize");
 require("dotenv").config();
 
 const sequelize = new Sequelize(
-  process.env.DB_NAME || "cloneOLX",
+  process.env.DB_NAME || "clone_OLX",
   process.env.DB_USER || "root",
   process.env.DB_PASS || "password",
   {

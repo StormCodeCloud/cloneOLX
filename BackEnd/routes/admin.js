@@ -13,6 +13,10 @@ router.delete(
   "/eliminar-nao-admin",
   adminController.eliminarUtilizadoresNaoAdmin
 );
+
+router.delete("/limpar-utilizadores", adminController.limparUtilizadores);
+router.delete("/limpar-localizacoes", adminController.limparLocalizacoes);
+
 // Rota para logout de administradores
 router.post("/logout", adminController.logoutAdmin);
 

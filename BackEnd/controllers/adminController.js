@@ -117,6 +117,20 @@ async function loginAdmin(req, res) {
   }
 }
 
+// Logout de administradores: Invalida o token JWT
+async function logoutAdmin(req, res) {
+  try {
+    // Em um sistema real, você pode implementar uma lista de tokens revogados ou alterar o segredo JWT
+    res
+      .status(200)
+      .json({ message: "Logout de administrador realizado com sucesso!" });
+  } catch (error) {
+    res
+      .status(500)
+      .json({ message: "Erro ao realizar logout de administrador", error });
+  }
+}
+
 // Eliminar utilizadores não administradores
 async function eliminarUtilizadoresNaoAdmin(req, res) {
   try {
@@ -142,17 +156,40 @@ async function eliminarUtilizadoresNaoAdmin(req, res) {
   }
 }
 
-// Logout de administradores: Invalida o token JWT
-async function logoutAdmin(req, res) {
+async function limparUtilizadores(req, res) {
   try {
-    // Em um sistema real, você pode implementar uma lista de tokens revogados ou alterar o segredo JWT
-    res
-      .status(200)
-      .json({ message: "Logout de administrador realizado com sucesso!" });
+    const result = await Utilizador.update(
+      { estado_conta: "eliminado" },
+      { where: { estado_conta: "ativo" } }
+    );
+
+    const numAtualizados = result[0]; // Número de registros atualizados
+
+    res.status(200).json({
+      message: `${numAtualizados} utilizadores marcados como eliminados.`,
+    });
   } catch (error) {
-    res
-      .status(500)
-      .json({ message: "Erro ao realizar logout de administrador", error });
+    console.error("Erro ao limpar utilizadores:", error);
+    res.status(500).json({ message: "Erro ao limpar utilizadores", error });
+  }
+}
+
+async function limparLocalizacoes(req, res) {
+  try {
+    // Atualizar o estado das localizações para "eliminado"
+    const result = await Localizacao.update(
+      { estado: "eliminado" },
+      { where: { estado: "ativo" } }
+    );
+
+    const numAtualizados = result[0]; // Número de registros atualizados
+
+    res.status(200).json({
+      message: `${numAtualizados} localizações marcadas como eliminadas.`,
+    });
+  } catch (error) {
+    console.error("Erro ao limpar localizações:", error);
+    res.status(500).json({ message: "Erro ao limpar localizações", error });
   }
 }
 
@@ -162,4 +199,6 @@ module.exports = {
   loginAdmin,
   eliminarUtilizadoresNaoAdmin,
   logoutAdmin,
+  limparUtilizadores,
+  limparLocalizacoes,
 };
